@@ -1,6 +1,7 @@
 // 載入相關套件
 const express = require('express')
 const mongoose = require('mongoose')
+const exphbs = require('express-handlebars')
 const app = express()
 const port = 3000
 // 非正式環境
@@ -17,10 +18,13 @@ db.once('open', () => {
   console.log('mongoDB connected')
 })
 
+// 設定view引擎
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
+app.set('view engine', 'hbs')
 
 // 設定路由
 app.get('/', (req, res) => {
-  res.send('good')
+  res.render('index')
 })
 
 // 監聽伺服器
