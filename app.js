@@ -22,6 +22,7 @@ db.once('open', () => {
 // 設定view引擎
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
+app.use(express.static('public'))
 
 // 設定路由
 app.get('/', (req, res) => {
