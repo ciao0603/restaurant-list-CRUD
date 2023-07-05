@@ -37,7 +37,15 @@ app.get('/', (req, res) => {
     .catch(error => console.log(error))
 })
 // 搜尋
-
+app.get('/search', (req,res) => {
+  const KEYWORD = req.query.keyword
+  const keyword = KEYWORD.toLowerCase()
+  Data.find()
+    .lean()
+    .then(restaurantList => restaurantList.filter(restaurant => restaurant.name.toLowerCase().includes(keyword) || restaurant.category.toLowerCase().includes(keyword)))
+    .then(datas => res.render('index', {datas, KEYWORD}))
+    .catch(error => console.log(error))
+})
 // 新增-get(一定要放路由:id前面)
 app.get('/restaurants/new', (req, res) => {
   res.render('new')
