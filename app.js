@@ -32,6 +32,14 @@ app.get('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  Data.findById(id)
+    .lean()
+    .then(data => res.render('show', { data }))
+    .catch(error => console.log(error))
+})
+
 // 監聽伺服器
 app.listen(port, () => {
   console.log(`Running on localhost:${port}`)
