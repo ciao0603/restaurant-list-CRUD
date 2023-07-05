@@ -35,6 +35,26 @@ app.get('/', (req, res) => {
     .then(datas => res.render('index', {datas}))
     .catch(error => console.log(error))
 })
+// 新增-get(一定要放路由:id前面)
+app.get('/restaurants/new', (req, res) => {
+  res.render('new')
+})
+// 新增-post
+app.post('/restaurants', (req, res) => {
+  const restaurant = {
+    name : req.body.name,
+    category: req.body.category,
+    image: req.body.image,
+    location: req.body.location,
+    phone: req.body.phone,
+    google_map: req.body.google_map,
+    rating: req.body.rating,
+    description: req.body.description
+  }
+  Data.create(restaurant)
+    .then(data => res.redirect('/'))
+    .catch(error => console.log(error))
+})
 // 簡介
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
