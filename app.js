@@ -2,6 +2,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
+const Data = require('./models/restaurant')
 const app = express()
 const port = 3000
 // 非正式環境
@@ -24,7 +25,10 @@ app.set('view engine', 'hbs')
 
 // 設定路由
 app.get('/', (req, res) => {
-  res.render('index')
+  Data.find()
+    .lean()
+    .then(datas => res.render('index', {datas}))
+    .catch(error => console.log(error))
 })
 
 // 監聽伺服器
