@@ -1,3 +1,4 @@
+// 待解決: 刪除功能 => 路由可連接，但跑不出來
 // 載入相關套件
 const express = require('express')
 const mongoose = require('mongoose')
@@ -35,6 +36,8 @@ app.get('/', (req, res) => {
     .then(datas => res.render('index', {datas}))
     .catch(error => console.log(error))
 })
+// 搜尋
+
 // 新增-get(一定要放路由:id前面)
 app.get('/restaurants/new', (req, res) => {
   res.render('new')
@@ -95,6 +98,14 @@ Data.findById(id)
   })
   .then(() => res.redirect(`/restaurants/${id}`))
   .catch(error => console.log(error))
+})
+// 刪除
+app.post('/restaurants/:id/delete', (req, res) => {
+  const id = req.params.id
+  Data.findById(id)
+    .then(todo => todo.remove())
+    .then(todo => res.redirect('/'))
+    .catch(error => console.log(error))
 })
 
 // 監聽伺服器
