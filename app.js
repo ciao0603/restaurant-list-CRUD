@@ -111,8 +111,10 @@ Data.findById(id)
 app.post('/restaurants/:id/delete', (req, res) => {
   const id = req.params.id
   Data.findById(id)
-    .then(todo => todo.remove())
-    .then(todo => res.redirect('/'))
+    .then(data => console.log('found by id'))
+    .then(data => data.remove())
+    .then(data => console.log('removed'))
+    .then(data => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
