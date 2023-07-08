@@ -3,6 +3,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
+const methodOverride = require('method-override')
 const Data = require('./models/restaurant')
 const app = express()
 const port = 3000
@@ -27,6 +28,8 @@ app.set('view engine', 'hbs')
 app.use(express.static('public'))
 // 載入body-parser
 app.use(express.urlencoded({extended: true}))
+// 載入method-override
+app.use(methodOverride('_method'))
 
 // 設定路由
 // 瀏覽
@@ -83,7 +86,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 // 編輯-post
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
 const id = req.params.id
 const name = req.body.name
 const category = req.body.category
@@ -108,7 +111,7 @@ Data.findById(id)
   .catch(error => console.log(error))
 })
 // 刪除
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   Data.findById(id)
     .then(data => console.log('found by id'))
