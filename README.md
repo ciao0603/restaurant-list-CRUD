@@ -1,6 +1,6 @@
 # 我的餐廳清單(CRUD)
 
-![image](https://github.com/ciao0603/restaurant-list-CRUD/blob/main/%E6%93%B7%E5%8F%96.PNG)
+![image](https://github.com/ciao0603/restaurant-list-CRUD/blob/main/index%20page.PNG)
 
 這是一份由個人在台北市最喜愛的8間餐廳組成的清單，可進行搜尋、瀏覽詳細資訊、查詢Google地圖等功能。
 
