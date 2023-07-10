@@ -35,5 +35,6 @@ const dataSchema = new Schema({
     required: true
   },
 })
+
 // model轉套件
 module.exports = mongoose.model('Data', dataSchema)

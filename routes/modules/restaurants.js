@@ -77,9 +77,8 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   const id = req.params.id
   Data.findById(id)
-    .then(data => console.log('found by id'))
+    .then(data => console.log(data))
     .then(data => data.remove())
-    .then(data => console.log('removed'))
     .then(data => res.redirect('/'))
     .catch(error => console.log(error))
 })
