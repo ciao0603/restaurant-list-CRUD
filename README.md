@@ -1,5 +1,7 @@
 # 我的餐廳清單(CRUD)
 
+![image](https://github.com/ciao0603/restaurant-list-CRUD/blob/main/%E6%93%B7%E5%8F%96.PNG)
+
 這是一份由個人在台北市最喜愛的8間餐廳組成的清單，可進行搜尋、瀏覽詳細資訊、查詢Google地圖等功能。
 
 ## 目錄
@@ -36,17 +38,21 @@ cd restaurant-list-CRUD
 ```
 npm i
 ```
-4. 啟動專案:
+4. 設定環境變數以連線資料庫:
 ```
-npm run dev
+MONGODB_URI=mongodb+srv://<MongoDB帳號>:<MongoDB密碼>@jocelyn.x8jkuvr.mongodb.net/<MongoDB資料庫名稱>?retryWrites=true&w=majority
 ```
-5. 如果看到這行字代表啟動成功，輸入網址即可進入應用程式:
+5. 啟動專案:
+```
+npm run start
+```
+6. 如果看到這行字代表啟動成功，輸入網址即可進入應用程式:
 ```
 Express is listening on http://localhost:3000
 ```
-6. 如需停止
+7. 如需停止
 ```
-^C //ctrl+C
+ctrl+C
 ```
 
 ## 開發工具
@@ -55,5 +61,6 @@ Express is listening on http://localhost:3000
 + Express-Handlebars 4.0.2
 + Bootstrap 5.1.3
 + Font-awesome 5.8.1
++ MongoDB
 + Mongoose 7.3.1
 + Dotenv 16.3.1
