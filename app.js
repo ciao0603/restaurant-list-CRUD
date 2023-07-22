@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 const session = require('express-session')
 
+const usePassport = require('./config/passport')
 const routes = require('./routes')
 const app = express()
 const port = 3000
@@ -27,6 +28,8 @@ app.use(session({
   saveUninitialized: true
 }))
 
+// 呼叫passport
+usePassport(app)
 
 // 設定路由
 app.use(routes)
