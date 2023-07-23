@@ -23,12 +23,22 @@ router.get('/register', (req, res) => {
 // register-post
 router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
+  const errors = []
 
   User.findOne({ email })
     .then(user => {
       if (user) {
-        console.log('user exist')
-        return res.render('login')
+        errors.push({ message: 'Email已註冊，請直接登入' })
+        return res.render('login', { errors })
+      }
+      if (!email || !password || !confirmPassword) {
+        errors.push({ message: 'Email與密碼不可空白' })
+      }
+      if (password !== confirmPassword) {
+        errors.push({ message: '密碼與確認密碼不相符' })
+      }
+      if (errors.length) {
+        return res.render('register', { errors, name, email, password, confirmPassword })
       }
       return User
         .create({ name, email, password })
