@@ -18,7 +18,7 @@ app.set('view engine', 'hbs')
 // 套入靜態css
 app.use(express.static('public'))
 // 載入body-parser
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 // 載入method-override
 app.use(methodOverride('_method'))
 // 設定session
@@ -30,6 +30,12 @@ app.use(session({
 
 // 呼叫passport
 usePassport(app)
+// 依登入狀態切換導覽列(login、logout)，交接狀態(req>res)
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
 
 // 設定路由
 app.use(routes)

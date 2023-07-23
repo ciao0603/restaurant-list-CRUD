@@ -1,33 +1,42 @@
 <!DOCTYPE html>
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
   <title>Restaurant List</title>
   <link href="https://bootswatch.com/5/journal/bootstrap.min.css"
     rel="stylesheet"
     crossorigin="anonymous">
-  <link rel="stylesheet" href="/stylesheets/index.css">
+  <link rel="stylesheet"
+    href="/stylesheets/index.css">
 </head>
 
 <body>
-    {{!-- navigation --}}
-    <nav class="navbar navbar-light bg-light">
-      <div class="container">
-        <a class="navbar-brand"
-          href="/">
-          <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
-            width="30"
-            height="30"
-            class="d-inline-block align-top"
-            alt="好。吃">
-          Restaurant List
-        </a>
-        <a href="/restaurants/new"
-          class="btn btn-primary">新增餐廳</a>
-      </div>
-    </nav>
-    
-    <div class="banner"></div>
+  {{!-- navigation --}}
+  <nav class="navbar navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand"
+        href="/">
+        <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
+          width="30"
+          height="30"
+          class="d-inline-block align-top"
+          alt="好。吃">
+        {{#if user}} {{user.name}}'s {{/if}}
+        Restaurant List
+      </a>
+      {{#if isAuthenticated}}
+      <a href="/users/logout"
+        class="btn btn-outline-primary">Logout</a>
+      {{else}}
+      <a href="/users/login"
+        class="btn btn-outline-primary">Login</a>
+      {{/if}}
+    </div>
+  </nav>
+
+  <div class="banner"></div>
 
   {{{ body }}}
 
