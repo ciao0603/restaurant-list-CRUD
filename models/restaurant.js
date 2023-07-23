@@ -34,6 +34,12 @@ const dataSchema = new Schema({
     type: String,
     required: true
   },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'user',
+    index: true,
+    required: true
+  }
 })
 
 // model轉套件

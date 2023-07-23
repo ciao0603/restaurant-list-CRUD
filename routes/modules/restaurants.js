@@ -6,7 +6,8 @@ const router = express.Router()
 router.get('/search', (req, res) => {
   const KEYWORD = req.query.keyword
   const keyword = KEYWORD.toLowerCase()
-  Data.find()
+  const userId = req.user._id
+  Data.find({ userId })
     .lean()
     .then(restaurantList => restaurantList.filter(restaurant => restaurant.name.toLowerCase().includes(keyword) || restaurant.category.toLowerCase().includes(keyword)))
     .then(datas => res.render('index', { datas, KEYWORD }))
@@ -18,48 +19,38 @@ router.get('/new', (req, res) => {
 })
 // 新增-post
 router.post('', (req, res) => {
-  const restaurant = {
-    name: req.body.name,
-    category: req.body.category,
-    image: req.body.image,
-    location: req.body.location,
-    phone: req.body.phone,
-    google_map: req.body.google_map,
-    rating: req.body.rating,
-    description: req.body.description
-  }
+  const { name, category, image, location, phone, google_map, rating, description } = req.body
+  const userId = req.user._id
+  const restaurant = { name, category, image, location, phone, google_map, rating, description, userId }
   Data.create(restaurant)
-    .then(data => res.redirect('/'))
+    .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 // 簡介
 router.get('/:id', (req, res) => {
-  const id = req.params.id
-  Data.findById(id)
+  const _id = req.params.id
+  const userId = req.user._id
+  Data.findOne({ _id, userId})
     .lean()
     .then(data => res.render('show', { data }))
     .catch(error => console.log(error))
 })
 // 編輯-get
 router.get('/:id/edit', (req, res) => {
-  const id = req.params.id
-  Data.findById(id)
+  const _id = req.params.id
+  const userId = req.user._id
+  Data.findOne({ _id, userId })
     .lean()
     .then(data => res.render('edit', { data }))
     .catch(error => console.log(error))
 })
 // 編輯-post
 router.put('/:id', (req, res) => {
-  const id = req.params.id
-  const name = req.body.name
-  const category = req.body.category
-  const location = req.body.location
-  const google_map = req.body.google_map
-  const phone = req.body.phone
-  const description = req.body.description
-  const image = req.body.image
+  const _id = req.params.id
+  const userId = req.user._id
+  const { name, category, image, location, phone, google_map, description } = req.body
 
-  Data.findById(id)
+  Data.findOne({ _id, userId })
     .then(data => {
       data.name = name
       data.category = category
@@ -70,15 +61,16 @@ router.put('/:id', (req, res) => {
       data.image = image
       return data.save()
     })
-    .then(() => res.redirect(`/restaurants/${id}`))
+    .then(() => res.redirect(`/restaurants/${_id}`))
     .catch(error => console.log(error))
 })
 // 刪除
 router.delete('/:id', (req, res) => {
-  const id = req.params.id
-  Data.findById(id)
-    .then(data => data.deleteOne({_id:"id"}))
-    .then(data => res.redirect('/'))
+  const _id = req.params.id
+  const userId = req.user._id
+  Data.findOne({ _id, userId })
+    .then(data => data.deleteOne({ _id: "id" }))
+    .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
