@@ -1,0 +1,14 @@
+[
+  {
+    "email": "user1@example.com",
+    "password": "12345678",
+    "startIndex": 1,
+    "endIndex": 3
+  },
+  {
+    "email": "user2@example.com",
+    "password": "12345678",
+    "startIndex": 4,
+    "endIndex": 6
+  }
+]
