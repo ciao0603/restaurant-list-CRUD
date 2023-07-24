@@ -1,4 +1,3 @@
-// 待解決: 刪除功能 => 路由可連接，但跑不出來
 // 載入相關套件
 const express = require('express')
 const exphbs = require('express-handlebars')
@@ -9,7 +8,11 @@ const flash = require('connect-flash')
 const usePassport = require('./config/passport')
 const routes = require('./routes')
 const app = express()
-const port = 3000
+
+// 非正式環境
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 require('./config/mongoose')
 
@@ -46,6 +49,7 @@ app.use((req, res, next) => {
 app.use(routes)
 
 // 監聽伺服器
-app.listen(port, () => {
-  console.log(`Running on localhost:${port}`)
+const PORT = process.env.PORT
+app.listen(PORT, () => {
+  console.log(`Running on localhost:${PORT}`)
 })
