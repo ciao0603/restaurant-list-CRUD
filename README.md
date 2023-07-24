@@ -1,8 +1,8 @@
 # 我的餐廳清單(CRUD)
 
-![image](https://github.com/ciao0603/restaurant-list-CRUD/blob/main/index%20page.PNG)
+![image](https://github.com/ciao0603/restaurant-list-CRUD/blob/main/restaurantList.png)
 
-這是一份由個人在台北市最喜愛的8間餐廳組成的清單，可進行搜尋、瀏覽詳細資訊、查詢Google地圖等功能。
+這是一份餐廳收藏清單，登入後可根據個人喜好進行增減/搜尋餐廳、瀏覽詳細資訊、查詢Google地圖等功能。
 
 ## 目錄
 
@@ -13,16 +13,18 @@
 
 ## 功能
 
+- **使用者登入：** 使用者可以進行註冊登入並建立自己的餐廳清單，也可利用Facebook直接登入。
+
 - **瀏覽餐廳：** 使用者可以瀏覽餐廳清單，查看餐廳的詳細資訊，包括名稱、菜式類型、電話號碼和評分等。
 
 - **搜尋餐廳：** 應用程式提供搜尋功能，讓使用者可以根據餐廳的名稱或菜式類型進行搜尋。
 
-- **查看餐廳位置：** 連結Google地圖，使用者可以查看餐聽所在地。
+- **查看餐廳位置：** 連結Google地圖，使用者可以查看餐廳所在地。
 
-- **新增/刪除餐廳：** 使用者可以根據個人喜好自由添加或刪除餐廳。
+- **新增/刪除/編輯餐廳：** 使用者可以根據個人喜好自由編輯清單內容。
 
 ## 環境
-請先確保已安裝Node.js 和 npm 。
+請先確保已安裝 Node.js 和 npm 。
 
 ## 安裝
 
@@ -38,19 +40,35 @@ cd restaurant-list-CRUD
 ```
 npm i
 ```
-4. 設定環境變數以連線資料庫:
+4. 參考.env範例設定環境變數:
 ```
-MONGODB_URI=mongodb+srv://<MongoDB帳號>:<MongoDB密碼>@jocelyn.x8jkuvr.mongodb.net/<MongoDB資料庫名稱>?retryWrites=true&w=majority
+MONGODB_URI=mongodb://localhost/restaurant
+SESSION_SECRET=IAmSessionSecret
+FACEBOOK_ID=SKIP
+FACEBOOK_SECRET=SKIP
+FACEBOOK_CALLBACK=http://localhost:3000/auth/facebook/callback
+PORT=3000
 ```
-5. 啟動專案:
+5. 載入種子資料:
+```
+npm run seed
+```
+6. 啟動專案:
 ```
 npm run start
 ```
-6. 如果看到這行字代表啟動成功，輸入網址即可進入應用程式:
+7. 如果看到這行字代表啟動成功，輸入網址即可進入應用程式:
 ```
 Express is listening on http://localhost:3000
 ```
-7. 如需停止
+8. 確認資料庫是否連線成功:
+```
+// 連線成功
+mongoDB connected
+// 連線失敗
+mongoDB error
+```
+9. 如需停止請輸入
 ```
 ctrl+C
 ```
@@ -64,3 +82,10 @@ ctrl+C
 + MongoDB
 + Mongoose 7.3.1
 + Dotenv 16.3.1
++ Method-override 3.0.0
++ Bcryptjs 2.4.3
++ Connect-flash 0.1.1
++ Express-session 1.17.1
++ Passport 0.4.1
++ Passport-local 1.0.0
++ Passport-facebook 3.0.0
